@@ -1,5 +1,4 @@
-﻿using ApiAgroFin.Contratos.Persistence;
-using ApiAgroFin.Data;
+﻿using ApiAgroFin.Data;
 using System.Threading.Tasks;
 
 namespace ApiAgroFin.Contratos.Persistence.GeralPersistence {

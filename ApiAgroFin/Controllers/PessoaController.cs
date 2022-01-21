@@ -1,5 +1,6 @@
-﻿using ApiAgroFin.Contratos;
-using ApiAgroFin.Models;
+﻿
+using ApiAgroFin.Contratos;
+using ApiAgroFin.Data.Dtos;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -29,7 +30,7 @@ namespace ApiAgroFin.Controllers {
 
                 var pessoas = await _pessoaService.GetAllPessoasAsync(true);
                 if(pessoas == null) {
-                    return NotFound("Nenhuma pessoa encontrada.");
+                    return NoContent();
                 }
                 return Ok(pessoas);
 
@@ -38,6 +39,21 @@ namespace ApiAgroFin.Controllers {
                 return this.StatusCode(StatusCodes.Status500InternalServerError,
                     $"Erro ao tentar recuperar pessoas. Erro: {ex.Message}");
             }
+
+
+            //Forma sem o AutoMapper.
+            //var pessoasRetorno = new List<PessoaDto>();
+
+            //foreach (var pessoa in pessoas) {
+
+            //    pessoasRetorno.Add(new PessoaDto {
+            //        Pessoa_Id = pessoa.Pessoa_Id,
+            //        //Pessoa_Numero_Identificador = pessoa.Pessoa_Numero_Identificador
+            //        Pessoa_Nome = pessoa.Pessoa_Nome,
+            //        Pessoa_Numero_Identificador = pessoa.Pessoa_Numero_Identificador,
+            //        Enderecos = pessoa.Enderecos
+            //    }) ; 
+            //}
         }
 
 
@@ -48,7 +64,7 @@ namespace ApiAgroFin.Controllers {
 
                 var pessoa = await _pessoaService.GetPessoasByIdAsync(id, true);
                 if (pessoa == null) {
-                    return NotFound("Nenhuma pessoa por ID encontrada.");
+                    return NoContent();
                 }
                 return Ok(pessoa);
 
@@ -66,7 +82,7 @@ namespace ApiAgroFin.Controllers {
 
                 var pessoa = await _pessoaService.GetAllPessoasByNomeAsync(nome, true);
                 if (pessoa == null) {
-                    return NotFound("Nenhuma pessoa por NOME encontrada.");
+                    return NoContent();
                 }
                 return Ok(pessoa);
 
@@ -79,7 +95,7 @@ namespace ApiAgroFin.Controllers {
 
 
         [HttpPost]
-        public async Task<IActionResult> Post(Pessoa model) {
+        public async Task<IActionResult> Post(PessoaDto model) {
 
             try {
 
@@ -99,7 +115,7 @@ namespace ApiAgroFin.Controllers {
 
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> Put(int id, Pessoa model) {
+        public async Task<IActionResult> Put(int id, PessoaDto model) {
 
             try {
 

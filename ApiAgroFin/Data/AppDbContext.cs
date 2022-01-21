@@ -2,13 +2,9 @@
 using Microsoft.EntityFrameworkCore;
 
 namespace ApiAgroFin.Data {
-    public class AppDbContext : DbContext {
+    public class AppDbContext :DbContext {
 
-        public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) {
-
-
-        }
-
+        public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
 
 
         // Evento é Pessoa
@@ -20,10 +16,16 @@ namespace ApiAgroFin.Data {
         protected override void OnModelCreating(ModelBuilder builder) {
 
             builder.Entity<Pessoa>()
-                 .HasMany(p => p.Enderecos)
-                 .WithOne(p => p.pessoa)
-                 .OnDelete(DeleteBehavior.Cascade);
+                .HasMany(p => p.Enderecos)
+                .WithOne(p => p.pessoa)
+                .OnDelete(DeleteBehavior.Cascade);
 
-        } 
+            //builder.Entity<Pessoa>()
+            //    .HasMany(p => p.Enderecos)
+            //    .WithOne(p => p.pessoa)
+            //    .OnDelete(DeleteBehavior.Cascade);
+
+        }
+
     }
 }

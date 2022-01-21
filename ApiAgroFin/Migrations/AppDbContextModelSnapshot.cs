@@ -87,7 +87,8 @@ namespace ApiAgroFin.Migrations
                 {
                     b.HasOne("ApiAgroFin.Models.Pessoa", "pessoa")
                         .WithMany("Enderecos")
-                        .HasForeignKey("Pessoa_Id");
+                        .HasForeignKey("Pessoa_Id")
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.Navigation("pessoa");
                 });

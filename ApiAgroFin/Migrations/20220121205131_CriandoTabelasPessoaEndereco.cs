@@ -2,7 +2,7 @@
 
 namespace ApiAgroFin.Migrations
 {
-    public partial class V_01_CriandoTabelas : Migration
+    public partial class CriandoTabelasPessoaEndereco : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -43,7 +43,7 @@ namespace ApiAgroFin.Migrations
                         column: x => x.Pessoa_Id,
                         principalTable: "Pessoa",
                         principalColumn: "Pessoa_Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(

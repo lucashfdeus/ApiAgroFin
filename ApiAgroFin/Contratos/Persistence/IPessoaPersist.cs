@@ -1,4 +1,5 @@
-﻿using ApiAgroFin.Models;
+﻿using ApiAgroFin.Data.Dtos;
+using ApiAgroFin.Models;
 using System.Threading.Tasks;
 
 namespace ApiAgroFin.Contratos.Persistence {

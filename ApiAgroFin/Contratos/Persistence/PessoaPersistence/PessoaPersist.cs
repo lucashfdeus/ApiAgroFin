@@ -43,11 +43,13 @@ namespace ApiAgroFin.Contratos.Persistence.PessoaPersistence {
 
             return await query.ToArrayAsync();
         }
+      
         public async Task<Pessoa> GetPessoaByIdAsync(int pessoa_Id, bool includeEndereco = false) {
 
             IQueryable<Pessoa> query = _context.Pessoa
                 .Include(p => p.Enderecos);
 
+            //Verificar a necessidade de colocar esse if.
             if (includeEndereco) {
                 query = query
                     .Include(p => p.Enderecos);
@@ -61,5 +63,6 @@ namespace ApiAgroFin.Contratos.Persistence.PessoaPersistence {
             return await query.FirstOrDefaultAsync();
         }
 
+        
     }
 }

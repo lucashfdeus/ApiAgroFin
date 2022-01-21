@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ApiAgroFin.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20220121121254_V_01_CriandoTabelas")]
-    partial class V_01_CriandoTabelas
+    [Migration("20220121205131_CriandoTabelasPessoaEndereco")]
+    partial class CriandoTabelasPessoaEndereco
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -89,7 +89,8 @@ namespace ApiAgroFin.Migrations
                 {
                     b.HasOne("ApiAgroFin.Models.Pessoa", "pessoa")
                         .WithMany("Enderecos")
-                        .HasForeignKey("Pessoa_Id");
+                        .HasForeignKey("Pessoa_Id")
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.Navigation("pessoa");
                 });

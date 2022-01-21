@@ -1,8 +1,8 @@
-﻿using ApiAgroFin.Data.Dtos;
+﻿using ApiAgroFin.Models;
 using System.ComponentModel.DataAnnotations;
 
-namespace ApiAgroFin.Models {
-    public class Endereco {
+namespace ApiAgroFin.Data.Dtos {
+    public class EnderecoDto {
 
         [Key]
         [Required]
@@ -27,9 +27,8 @@ namespace ApiAgroFin.Models {
         public string Endereco_Estado { get; set; }
 
         //  public virtual Pessoa Endereco_Pessoa { get; set; }
-       // public virtual Pessoa Pessoa { get; set; }
+        // public virtual Pessoa Pessoa { get; set; }
+        public PessoaDto Pessoa { get; set; }
 
-        //public int Endereco_Pessoa_Id { get; set; }
-        public Pessoa pessoa { get; set; }
     }
 }
