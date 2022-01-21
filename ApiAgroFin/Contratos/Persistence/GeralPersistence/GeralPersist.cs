@@ -3,11 +3,11 @@ using ApiAgroFin.Data;
 using System.Threading.Tasks;
 
 namespace ApiAgroFin.Contratos.Persistence.GeralPersistence {
-    public class GeralPersistence : IGeralPersist {
+    public class GeralPersist : IGeralPersist {
 
         private readonly AppDbContext _context;
 
-        public GeralPersistence(AppDbContext context) {
+        public GeralPersist(AppDbContext context) {
             _context = context;
         }
 

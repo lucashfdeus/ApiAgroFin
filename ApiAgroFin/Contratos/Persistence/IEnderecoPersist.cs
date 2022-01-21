@@ -7,7 +7,7 @@ namespace ApiAgroFin.Contratos.Persistence {
         //ENDERECOS
         Task<Endereco[]> GetAllEnderecoByNomeAsync(string nome);
         Task<Endereco[]> GetAllEnderecoAsync(bool includeEndereco);
-        Task<Endereco> GetAllEnderecoByIdAsync(int Endereco_Id);
+        Task<Endereco> GetAllEnderecoByIdAsync(int endereco_Id);
 
 
     }

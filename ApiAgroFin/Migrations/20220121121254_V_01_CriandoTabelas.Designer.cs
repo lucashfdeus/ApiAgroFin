@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ApiAgroFin.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20220120185002_CriandoTabelaPessoa")]
-    partial class CriandoTabelaPessoa
+    [Migration("20220121121254_V_01_CriandoTabelas")]
+    partial class V_01_CriandoTabelas
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

@@ -2,7 +2,7 @@
 
 namespace ApiAgroFin.Migrations
 {
-    public partial class CriandoTabelaPessoa : Migration
+    public partial class V_01_CriandoTabelas : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

@@ -32,7 +32,7 @@ namespace ApiAgroFin.Contratos.Persistence.EnderecoPersistence {
             return await query.ToArrayAsync();
         }
 
-        public async Task<Endereco> GetAllEnderecoByIdAsync(int Endereco_Id) {
+        public async Task<Endereco> GetAllEnderecoByIdAsync(int endereco_Id) {
 
             IQueryable<Endereco> query = _context.Endereco
                .Include(e => e.Endereco_Id);

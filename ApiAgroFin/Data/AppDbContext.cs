@@ -19,12 +19,11 @@ namespace ApiAgroFin.Data {
         //Relacionamento de (1-N)
         protected override void OnModelCreating(ModelBuilder builder) {
 
-            //    //Relacionamento de (1-N)
-            //    builder.Entity<Pessoa>()
-            //        .HasOne(pessoa => pessoa.Enderecos)
-            //        .WithMany(endereco => endereco.)
-            //        .HasForeignKey(endereco => endereco.);
-            //}
+            builder.Entity<Pessoa>()
+                 .HasMany(p => p.Enderecos)
+                 .WithOne(p => p.pessoa)
+                 .OnDelete(DeleteBehavior.Cascade);
+
         } 
     }
 }
