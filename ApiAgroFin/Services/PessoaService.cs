@@ -6,7 +6,7 @@ using AutoMapper;
 using System;
 using System.Threading.Tasks;
 
-namespace ApiAgroFin.Controllers {
+namespace ApiAgroFin.Services {
     public class PessoaService : IPessoaService {
 
         private readonly IGeralPersist _geralPersist;

@@ -2,8 +2,9 @@ using ApiAgroFin.Contratos;
 using ApiAgroFin.Contratos.Persistence;
 using ApiAgroFin.Contratos.Persistence.GeralPersistence;
 using ApiAgroFin.Contratos.Persistence.PessoaPersistence;
-using ApiAgroFin.Controllers;
+using ApiAgroFin.Contratos.Persistence.TituloPersistence;
 using ApiAgroFin.Data;
+using ApiAgroFin.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -34,8 +35,10 @@ namespace ApiAgroFin {
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
             services.AddScoped<IPessoaService, PessoaService>();
+            services.AddScoped<ITituloService, TituloService>();
             services.AddScoped<IGeralPersist, GeralPersist>();
             services.AddScoped<IPessoaPersist, PessoaPersist>();
+           services.AddScoped<ITituloPersist, TituloPersist>();
 
             services.AddControllers();
             services.AddCors();
