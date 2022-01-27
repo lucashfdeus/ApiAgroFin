@@ -7,7 +7,7 @@ using System.Text.Json.Serialization;
 namespace ApiAgroFin.Data.Dtos {
     public class RecebedorDto {
 
-
+        [JsonIgnore]
         [Key]
         [Required]
         public int Recebedor_Id { get; set; }

@@ -19,7 +19,9 @@ namespace ApiAgroFin.Data.Dtos {
         // public virtual Endereco PessoaEndereco { get; set; }
         // public int Pessoa_Endereco_I { get; set; }
        public virtual IEnumerable<EnderecoDto> Enderecos { get; set; }
+        [JsonIgnore]
        public virtual IEnumerable<PagadorDto> Pagadores { get; set; }
+        [JsonIgnore]
        public virtual IEnumerable<RecebedorDto> Recebedores { get; set; }
 
 
