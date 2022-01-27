@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace ApiAgroFin.Migrations
 {
-    public partial class CriandoTabelasGerais : Migration
+    public partial class CriandoTabelas : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -51,68 +51,68 @@ namespace ApiAgroFin.Migrations
                 name: "Pagador",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
+                    Pagador_Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Pessoa_Id = table.Column<int>(type: "int", nullable: true)
+                    Pessoa_Id = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Pagador", x => x.Id);
+                    table.PrimaryKey("PK_Pagador", x => x.Pagador_Id);
                     table.ForeignKey(
                         name: "FK_Pagador_Pessoa_Pessoa_Id",
                         column: x => x.Pessoa_Id,
                         principalTable: "Pessoa",
                         principalColumn: "Pessoa_Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
                 name: "Recebedor",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
+                    Recebedor_Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Pessoa_Id = table.Column<int>(type: "int", nullable: true)
+                    Pessoa_Id = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Recebedor", x => x.Id);
+                    table.PrimaryKey("PK_Recebedor", x => x.Recebedor_Id);
                     table.ForeignKey(
                         name: "FK_Recebedor_Pessoa_Pessoa_Id",
                         column: x => x.Pessoa_Id,
                         principalTable: "Pessoa",
                         principalColumn: "Pessoa_Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
                 name: "Titulo",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
+                    Titulo_Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Titulo_Data = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Titulo_Valor = table.Column<double>(type: "float", nullable: false),
                     Titulo_Status = table.Column<string>(type: "nvarchar(3)", maxLength: 3, nullable: false),
                     Titulo_Valor_Extenso = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Titulo_Descricao = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    PagadorId = table.Column<int>(type: "int", nullable: true),
-                    RecebedorId = table.Column<int>(type: "int", nullable: true)
+                    Pagador_Id = table.Column<int>(type: "int", nullable: true),
+                    Recebedor_Id = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Titulo", x => x.Id);
+                    table.PrimaryKey("PK_Titulo", x => x.Titulo_Id);
                     table.ForeignKey(
-                        name: "FK_Titulo_Pagador_PagadorId",
-                        column: x => x.PagadorId,
+                        name: "FK_Titulo_Pagador_Pagador_Id",
+                        column: x => x.Pagador_Id,
                         principalTable: "Pagador",
-                        principalColumn: "Id",
+                        principalColumn: "Pagador_Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_Titulo_Recebedor_RecebedorId",
-                        column: x => x.RecebedorId,
+                        name: "FK_Titulo_Recebedor_Recebedor_Id",
+                        column: x => x.Recebedor_Id,
                         principalTable: "Recebedor",
-                        principalColumn: "Id",
+                        principalColumn: "Recebedor_Id",
                         onDelete: ReferentialAction.Restrict);
                 });
 
@@ -132,14 +132,14 @@ namespace ApiAgroFin.Migrations
                 column: "Pessoa_Id");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Titulo_PagadorId",
+                name: "IX_Titulo_Pagador_Id",
                 table: "Titulo",
-                column: "PagadorId");
+                column: "Pagador_Id");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Titulo_RecebedorId",
+                name: "IX_Titulo_Recebedor_Id",
                 table: "Titulo",
-                column: "RecebedorId");
+                column: "Recebedor_Id");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

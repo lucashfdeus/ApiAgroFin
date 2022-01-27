@@ -18,7 +18,9 @@ namespace ApiAgroFin.Models {
        // public int Pessoa_Endereco_I { get; set; }
         public virtual IEnumerable<Endereco> Enderecos { get; set; }
 
+        public virtual IEnumerable<Pagador> Pagadores { get; set; }
 
+        public virtual IEnumerable<Recebedor> Recebedores { get; set; }
 
 
 

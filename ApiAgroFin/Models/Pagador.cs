@@ -1,16 +1,21 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 
-namespace ApiAgroFin.Models {
+namespace ApiAgroFin.Models  {
     public class Pagador{
 
         [Key]
         [Required]
-        public int Id { get; set; }
-       //public int Pessoa_Id { get; set; }
-        public Pessoa Pessoa { get; set; }
+        public int Pagador_Id { get; set; }
 
-        public virtual IEnumerable<Titulo> ListaTilulosPagador { get; set; }
+        [ForeignKey("Pessoa")]
+        public int Pessoa_Id { get; set; }
+    
+       public Pessoa Pessoa { get; set; }
+
+
 
 
 

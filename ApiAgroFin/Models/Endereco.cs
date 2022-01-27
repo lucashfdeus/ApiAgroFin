@@ -25,11 +25,6 @@ namespace ApiAgroFin.Models {
         [Required(ErrorMessage = "O campo Estado é obrigatório")]
         [StringLength(2, ErrorMessage = "O nome do Estado deve ser abreviado Ex: GO")]
         public string Endereco_Estado { get; set; }
-
-        //  public virtual Pessoa Endereco_Pessoa { get; set; }
-       // public virtual Pessoa Pessoa { get; set; }
-
-        //public int Endereco_Pessoa_Id { get; set; }
         public Pessoa pessoa { get; set; }
     }
 }

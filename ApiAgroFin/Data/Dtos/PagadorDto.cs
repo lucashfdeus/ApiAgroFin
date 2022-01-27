@@ -1,6 +1,8 @@
 ﻿using ApiAgroFin.Models;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 
 namespace ApiAgroFin.Data.Dtos {
     public class PagadorDto {
@@ -8,11 +10,14 @@ namespace ApiAgroFin.Data.Dtos {
 
         [Key]
         [Required]
-        public int Id { get; set; }
-        public int Pessoa_Id { get; set; }
-        public Pessoa Pessoa { get; set; }
+        public int Pagador_Id { get; set; }
 
-       // public virtual IEnumerable<TituloDto> ListaTilulosPagador { get; set; }
+        [ForeignKey("Pessoa")]
+        public int Pessoa_Id { get; set; }
+
+        [JsonIgnore]
+        public virtual IEnumerable<Pessoa> Pessoas { get; set; }
+
 
 
 

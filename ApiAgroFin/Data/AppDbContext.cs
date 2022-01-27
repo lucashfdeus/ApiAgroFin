@@ -1,5 +1,6 @@
 ﻿using ApiAgroFin.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace ApiAgroFin.Data {
     public class AppDbContext :DbContext {
@@ -27,22 +28,18 @@ namespace ApiAgroFin.Data {
                 .WithOne(p => p.pessoa)
                 .OnDelete(DeleteBehavior.Cascade);
 
-            //builder.Entity<Pagador>()
-            //    .HasKey(pg => new { pg.Id, pg.Pessoa });
+            builder.Entity<Pessoa>()
+                  .HasMany(p => p.Pagadores)
+                  .WithOne(p => p.Pessoa);
 
-            //builder.Entity<Recebedor>()
-            //   .HasKey(pgr => new { pgr.Id, pgr.Pessoa });
+            builder.Entity<Pessoa>()
+                  .HasMany(p => p.Recebedores)
+                  .WithOne(p => p.Pessoa);
+                 
 
 
-            builder.Entity<Titulo>()
-                .HasOne(tp => tp.Pagador)
-                .WithMany(t => t.ListaTilulosPagador);
-            //.HasForeignKey(r => r.PagadorId);
 
-            builder.Entity<Titulo>()
-              .HasOne(tp => tp.Recebedor)
-              .WithMany(t => t.ListaTilulosRecebedor);
-             //.HasForeignKey(r => r.RecebedorId);
+
 
 
         }

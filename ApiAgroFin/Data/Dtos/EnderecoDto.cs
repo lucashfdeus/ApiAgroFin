@@ -26,8 +26,6 @@ namespace ApiAgroFin.Data.Dtos {
         [StringLength(2, ErrorMessage = "O nome do Estado deve ser abreviado Ex: GO")]
         public string Endereco_Estado { get; set; }
 
-        //  public virtual Pessoa Endereco_Pessoa { get; set; }
-        // public virtual Pessoa Pessoa { get; set; }
         public PessoaDto Pessoa { get; set; }
 
     }

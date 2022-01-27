@@ -1,15 +1,20 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ApiAgroFin.Models {
     public class Recebedor {
 
         [Key]
         [Required]
-        public int Id { get; set; }
-       // public int Pessoa_Id { get; set; }     
+        public int Recebedor_Id { get; set; }
+
+        [ForeignKey("Pessoa")]
+        public int Pessoa_Id { get; set; }
         public Pessoa Pessoa { get; set; }
-        public virtual IEnumerable<Titulo> ListaTilulosRecebedor { get; set; }
+
+
+
 
 
     }

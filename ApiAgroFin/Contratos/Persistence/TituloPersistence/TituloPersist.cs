@@ -8,8 +8,8 @@ using System.Threading.Tasks;
 namespace ApiAgroFin.Contratos.Persistence.TituloPersistence {
 
     public class TituloPersist : ITituloPersist {
-                
-          private readonly AppDbContext _context;
+
+        private readonly AppDbContext _context;
 
         public TituloPersist(AppDbContext context) {
             _context = context;
@@ -19,38 +19,39 @@ namespace ApiAgroFin.Contratos.Persistence.TituloPersistence {
 
 
         public async Task<Titulo[]> GetAllTitulosAsync(bool includeRecebedor = false, bool includePagador = false) {
+
             IQueryable<Titulo> query = _context.Titulo
-                 .Include(tp => tp.Pagador)
-                 .Include(tr => tr.Recebedor);
-               
-            if (includeRecebedor && includePagador) {
-                query = query
-                  .Include(tp => tp.Pagador)
-                 .Include(tr => tr.Recebedor);
+                 .Include(tp => tp.Pagador);
+               //  .Include(tr => tr.Recebedor);
+
+            //if (includeRecebedor) {
+            //    query = query.Include(tr => tr.Recebedor);
+            //}
+
+            if (includePagador) {
+                query = query.Include(tp => tp.Pagador);
             }
 
-            query = query.AsNoTracking().OrderBy(p => p.Id);
+            query = query.AsNoTracking().OrderBy(p => p.Titulo_Id);
 
             return await query.ToArrayAsync();
         }
 
         public async Task<Titulo[]> GetAllTitulosByNomeAsync(string nome, bool includeRecebedor = false, bool includePagador = false) {
             IQueryable<Titulo> query = _context.Titulo
-                .Include(p => p.Pagador)
-                .Include(p => p.Recebedor);
-           
+                .Include(p => p.Pagador);
+                //.Include(p => p.Recebedor);
+
 
             if (includeRecebedor && includePagador) {
                 query = query
-                .Include(p => p.Pagador)
-                .Include(p => p.Recebedor);
-
-
+                .Include(p => p.Pagador);
+                //.Include(p => p.Recebedor);
             }
 
-            query = query.OrderBy(p => p.Id);
+            query = query.OrderBy(p => p.Titulo_Id);
 
-            query = query.OrderBy(p => p.Id)
+            query = query.OrderBy(p => p.Titulo_Id)
                     .Where(p => p.Titulo_Descricao.ToLower().Contains(nome.ToLower()));
 
 
@@ -60,21 +61,19 @@ namespace ApiAgroFin.Contratos.Persistence.TituloPersistence {
         public async Task<Titulo> GetTituloByIdAsync(int tituloId, bool includeRecebedor = false, bool includePagador = false) {
 
             IQueryable<Titulo> query = _context.Titulo
-                .Include(p => p.Pagador)
-                .Include(p => p.Recebedor);
+                .Include(p => p.Pagador);
+              //  .Include(p => p.Recebedor);
 
 
             // Verificar a necessidade de colocar esse if.
             if (includeRecebedor && includePagador) {
-                    query = query
-                .Include(p => p.Pagador)
-                .Include(p => p.Recebedor);
-
-
+                query = query
+            .Include(p => p.Pagador);
+            //.Include(p => p.Recebedor);
             }
 
-            query = query.AsNoTracking().OrderBy(t => t.Id)
-                    .Where(t => t.Id == tituloId);
+            query = query.AsNoTracking().OrderBy(t => t.Titulo_Id)
+                    .Where(t => t.Titulo_Id == tituloId);
             return await query.FirstOrDefaultAsync();
         }
 

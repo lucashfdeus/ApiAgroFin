@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ApiAgroFin.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20220124211239_CriandoTabelasGerais")]
-    partial class CriandoTabelasGerais
+    [Migration("20220127113939_CriandoTabelas")]
+    partial class CriandoTabelas
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -67,15 +67,15 @@ namespace ApiAgroFin.Migrations
 
             modelBuilder.Entity("ApiAgroFin.Models.Pagador", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("Pagador_Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("Pessoa_Id")
+                    b.Property<int>("Pessoa_Id")
                         .HasColumnType("int");
 
-                    b.HasKey("Id");
+                    b.HasKey("Pagador_Id");
 
                     b.HasIndex("Pessoa_Id");
 
@@ -104,15 +104,15 @@ namespace ApiAgroFin.Migrations
 
             modelBuilder.Entity("ApiAgroFin.Models.Recebedor", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("Recebedor_Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("Pessoa_Id")
+                    b.Property<int>("Pessoa_Id")
                         .HasColumnType("int");
 
-                    b.HasKey("Id");
+                    b.HasKey("Recebedor_Id");
 
                     b.HasIndex("Pessoa_Id");
 
@@ -121,15 +121,15 @@ namespace ApiAgroFin.Migrations
 
             modelBuilder.Entity("ApiAgroFin.Models.Titulo", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("Titulo_Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("PagadorId")
+                    b.Property<int?>("Pagador_Id")
                         .HasColumnType("int");
 
-                    b.Property<int?>("RecebedorId")
+                    b.Property<int?>("Recebedor_Id")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("Titulo_Data")
@@ -151,11 +151,11 @@ namespace ApiAgroFin.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("Id");
+                    b.HasKey("Titulo_Id");
 
-                    b.HasIndex("PagadorId");
+                    b.HasIndex("Pagador_Id");
 
-                    b.HasIndex("RecebedorId");
+                    b.HasIndex("Recebedor_Id");
 
                     b.ToTable("Titulo");
                 });
@@ -173,8 +173,10 @@ namespace ApiAgroFin.Migrations
             modelBuilder.Entity("ApiAgroFin.Models.Pagador", b =>
                 {
                     b.HasOne("ApiAgroFin.Models.Pessoa", "Pessoa")
-                        .WithMany()
-                        .HasForeignKey("Pessoa_Id");
+                        .WithMany("Pagadores")
+                        .HasForeignKey("Pessoa_Id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Pessoa");
                 });
@@ -182,8 +184,10 @@ namespace ApiAgroFin.Migrations
             modelBuilder.Entity("ApiAgroFin.Models.Recebedor", b =>
                 {
                     b.HasOne("ApiAgroFin.Models.Pessoa", "Pessoa")
-                        .WithMany()
-                        .HasForeignKey("Pessoa_Id");
+                        .WithMany("Recebedores")
+                        .HasForeignKey("Pessoa_Id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Pessoa");
                 });
@@ -191,31 +195,25 @@ namespace ApiAgroFin.Migrations
             modelBuilder.Entity("ApiAgroFin.Models.Titulo", b =>
                 {
                     b.HasOne("ApiAgroFin.Models.Pagador", "Pagador")
-                        .WithMany("ListaTilulosPagador")
-                        .HasForeignKey("PagadorId");
+                        .WithMany()
+                        .HasForeignKey("Pagador_Id");
 
                     b.HasOne("ApiAgroFin.Models.Recebedor", "Recebedor")
-                        .WithMany("ListaTilulosRecebedor")
-                        .HasForeignKey("RecebedorId");
+                        .WithMany()
+                        .HasForeignKey("Recebedor_Id");
 
                     b.Navigation("Pagador");
 
                     b.Navigation("Recebedor");
                 });
 
-            modelBuilder.Entity("ApiAgroFin.Models.Pagador", b =>
-                {
-                    b.Navigation("ListaTilulosPagador");
-                });
-
             modelBuilder.Entity("ApiAgroFin.Models.Pessoa", b =>
                 {
                     b.Navigation("Enderecos");
-                });
 
-            modelBuilder.Entity("ApiAgroFin.Models.Recebedor", b =>
-                {
-                    b.Navigation("ListaTilulosRecebedor");
+                    b.Navigation("Pagadores");
+
+                    b.Navigation("Recebedores");
                 });
 #pragma warning restore 612, 618
         }

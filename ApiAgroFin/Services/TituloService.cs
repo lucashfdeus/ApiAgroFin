@@ -32,7 +32,7 @@ namespace ApiAgroFin.Services {
                 _geralPersist.Add<Titulo>(titulo);
                 if (await _geralPersist.SaveChangesAsync()) {
 
-                    var tituloRetorno = await _tituloPersist.GetTituloByIdAsync(titulo.Id, false);
+                    var tituloRetorno = await _tituloPersist.GetTituloByIdAsync(titulo.Titulo_Id, false);
 
                     return _mapper.Map<TituloDto>(tituloRetorno);
                 }
@@ -52,14 +52,14 @@ namespace ApiAgroFin.Services {
                     return null;
                 }
 
-                model.Id = tituloId;
+                model.Titulo_Id = tituloId;
 
                 _mapper.Map(model, titulo);
 
                 _geralPersist.Update<Titulo>(titulo);
                 if (await _geralPersist.SaveChangesAsync()) {
 
-                    var tituloRetorno = await _tituloPersist.GetTituloByIdAsync(titulo.Id, false);
+                    var tituloRetorno = await _tituloPersist.GetTituloByIdAsync(titulo.Titulo_Id, false);
 
                     return _mapper.Map<TituloDto>(tituloRetorno);
                 }
